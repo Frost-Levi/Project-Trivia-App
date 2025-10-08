@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia</title>
+    <link rel="icon" type="image/x-icon" href="images/TopLogo.png">
+    <title>Flipping Trivia</title>
     <link rel="stylesheet" href="css/Style.css">
-    <script  src="JS/Questions.js" defer></script>
+    <script src="JS/Questions.js" defer></script>
+    <script src="JS/Themes.js" defer></script>
 </head>
 <body>
+    <header>
+        <img src="images/Logo.png" alt="Flipping Trivia Logo" class="logo">
+        <button id="theme-toggle" class="Button">Dark Theme</button>
+    </header>
     <div class="quizForm">
         <label for="amount">Number of Questions:</label>
         <input type="number" id="amount" class="Input" min="1" max="50" value="10">
+        <br>
     <label for="category">Category:</label>
     <select name="category" id="category" class="Dropdown">
 			<option value="">Any Category</option>
@@ -39,6 +46,7 @@
             <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
             <option value="32">Entertainment: Cartoon &amp; Animations</option>		
         </select>
+        <br>
         <label for="difficulty">Difficulty:</label>
         <select name="difficulty" id="difficulty" class="Dropdown">
             <option value="">Any Difficulty</option>
@@ -46,12 +54,14 @@
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
+        <br>
         <label for="type">Type:</label>
         <select name="type" id="type" class="Dropdown">
             <option value="">Any Type</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True/False</option>
         </select>
+        <br>
         <button id="submitButton" class="Button">Start Quiz</button>
     </div>
 </body>

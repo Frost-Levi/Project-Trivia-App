@@ -1,1 +1,59 @@
-/*# sourceMappingURL=Style.css.map */
+:root {
+  --primary-color: #ffffff;
+  --bg-color: #f9f9f9;
+  --text-color: #222222;
+  --border-color: #ccc;
+  --button-bg: #ffffff;
+  --button-text: #222222;
+  --button-hover-bg: #e0e0e0;
+}
+
+.dark-mode {
+  --primary-color: #000000;
+  --bg-color: #222222;
+  --text-color: #f9f9f9;
+  --border-color: #444444;
+  --button-bg: #333333;
+  --button-text: #f9f9f9;
+  --button-hover-bg: #444444;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+}
+
+.quizForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.quizForm .Dropdown, .quizForm .Input, .quizForm .Button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+.quizForm .Dropdown:hover, .quizForm .Input:hover, .quizForm .Button:hover {
+  background-color: var(--button-hover-bg);
+  cursor: pointer;
+}/*# sourceMappingURL=Style.css.map */
