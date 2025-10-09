@@ -76,3 +76,32 @@ function randomizeAnswers(question) {
     }
 }
 }
+
+answer1.addEventListener('click', function() {
+    if (answer1.dataset.correct === 'true') {
+        alert('Correct!');
+    } else {
+        alert('Incorrect!');
+    }
+});
+answer2.addEventListener('click', function() {
+    if (answer2.dataset.correct === 'true') {
+        alert('Correct!');
+    } else {
+        alert('Incorrect!');
+    }
+});
+answer3.addEventListener('click', function() {
+    if (answer3.dataset.correct === 'true') {
+        alert('Correct!');
+    } else {
+        alert('Incorrect!');
+    }
+});
+answer4.addEventListener('click', function() {
+    if (answer4.dataset.correct === 'true') {
+        alert('Correct!');
+    } else {
+        alert('Incorrect!');
+    }
+});
