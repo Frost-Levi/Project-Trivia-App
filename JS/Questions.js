@@ -37,7 +37,13 @@ async function fetchQuestions(amount, category, difficulty, type) {
         console.log(url);
         console.log(data.results);
         // Alert if not enough questions are available for the selected options
-        if (data.results.length < amount) alert(`Can't load enough questions for selected options. Please choose different options.`);
+        if (data.results.length < amount) {
+            alert(`Can't load enough questions for selected options. Please choose different options.`);
+            return;
+        }
+        // Save questions to localStorage and redirect to quiz page
+        localStorage.setItem('questions', JSON.stringify(data.results));
+        window.location.href = 'quiz.html'; 
         return data.results;
     } catch (error) {
         // Log and rethrow errors
