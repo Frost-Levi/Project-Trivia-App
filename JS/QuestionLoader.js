@@ -53,11 +53,14 @@ function randomizeAnswers(question) {
     answer2.innerHTML = answers[1];
     answer3.innerHTML = answers[2];
     answer4.innerHTML = answers[3];
+    // Decode HTML entities in correct answer for accurate comparison
+    var doc = new DOMParser().parseFromString(question.correct_answer, 'text/html');
+    question.correct_answer = doc.documentElement.textContent;
+
     if (answer1.innerHTML === question.correct_answer) {
         answer1.dataset.correct = 'true';
     } else {
-        answer1.dataset.correct = 
-        'false';
+        answer1.dataset.correct = 'false';
     }
     if (answer2.innerHTML === question.correct_answer) {
         answer2.dataset.correct = 'true';
