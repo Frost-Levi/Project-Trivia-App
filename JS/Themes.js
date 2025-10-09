@@ -12,15 +12,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.classList.remove('dark-mode');
   }
 
-
+  const img = document.querySelector('.logo');
   const btn = document.getElementById('theme-toggle');
 
   // Update the button text to match the current theme
   function updateBtn() {
     if(document.documentElement.classList.contains('dark-mode')) {
       btn.textContent = 'Light Theme'; 
+      img.src = 'images/Dark-logo.png'; // Update logo for dark theme
     } else {
       btn.textContent = 'Dark Theme'; 
+      img.src = 'images/Logo-light.png'; // Update logo for light theme
     }
   }
 
