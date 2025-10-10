@@ -5,6 +5,10 @@ const answer2 = document.getElementById('answer-2');
 const answer3 = document.getElementById('answer-3');
 const answer4 = document.getElementById('answer-4');
 const screen = document.querySelector('.AnswerReveal');
+const timer = document.getElementById('timer'); 
+var countdown; // Make countdown global
+var elapsedSeconds = 0;
+var elapsedInterval;
 
 // Retrieve questions from localStorage
 const questions = JSON.parse(localStorage.getItem('questions'));
@@ -15,6 +19,11 @@ var score = 0;
 // On page load, display the first question or redirect if none found
 addEventListener('DOMContentLoaded', function() {
     if (questions && questions.length > 0) {
+        elapsedSeconds = 0;
+        if (elapsedInterval) clearInterval(elapsedInterval);
+        elapsedInterval = setInterval(() => {
+            elapsedSeconds++;
+        }, 1000);
         displayQuestions(questions, 0);
     } else { // If no questions found, return to home page
         console.log('No questions found');
@@ -27,8 +36,8 @@ addEventListener('DOMContentLoaded', function() {
 function displayQuestions(questions, index) {
     quizQuestion.innerHTML = questions[index].question + `<br><span class="QuestionInfo">(${index + 1} of ${questions.length})</span>`;
     randomizeAnswers(questions[index]);
+    Timer();
 }
-
 // Randomize and display answer options for the current question
 function randomizeAnswers(question) {
     const answers = [
@@ -95,65 +104,77 @@ answer1.addEventListener('click', function() {
     if (answer1.dataset.correct === 'true') {
         correctAnswer(questions[currentQuestionIndex]);
     } else {
-        incorrectAnswer(questions[currentQuestionIndex]);
+        incorrectAnswer(questions[currentQuestionIndex], false);
     }
 });
 answer2.addEventListener('click', function() {
     if (answer2.dataset.correct === 'true') {
         correctAnswer(questions[currentQuestionIndex]);
     } else {
-        incorrectAnswer(questions[currentQuestionIndex]);
+        incorrectAnswer(questions[currentQuestionIndex], false);
     }
 });
 answer3.addEventListener('click', function() {
     if (answer3.dataset.correct === 'true') {
         correctAnswer(questions[currentQuestionIndex]);
     } else {
-        incorrectAnswer(questions[currentQuestionIndex]);
+        incorrectAnswer(questions[currentQuestionIndex], false);
     }
 });
 answer4.addEventListener('click', function() {
     if (answer4.dataset.correct === 'true') {
         correctAnswer(questions[currentQuestionIndex]);
     } else {
-        incorrectAnswer(questions[currentQuestionIndex]);
+        incorrectAnswer(questions[currentQuestionIndex], false);
     }
 });
 
 
 // Handle correct answer: update score, show feedback, and next button
+// Track time left globally for scoring
+var timeLeftGlobal = 15;
 function correctAnswer(question) {
+    clearInterval(countdown); // Stop timer when answered
     var modifier = 1;
     var text = '';
     if (question.type === 'multiple') {
         modifier = 2;
     }
     // Award points based on difficulty and type
+    let basePoints = 0;
     switch(question.difficulty) {
         case 'easy':
-            score += 5 * modifier;
-            text = 'Easy question answered correctly! +' + (5 * modifier) + ' points';
+            basePoints = 5 * modifier;
             break;
         case 'medium':
-            score += 10 * modifier;
-            text = 'Medium question answered correctly! +' + (10 * modifier) + ' points';
+            basePoints = 10 * modifier;
             break;
         case 'hard':
-            score += 15 * modifier;
-            text = 'Hard question answered correctly! +' + (15 * modifier) + ' points';
+            basePoints = 15 * modifier;
             break;
     }
+    // Subtract 1 point for each second waited (max 15 seconds)
+    let secondsWaited = 15 - timeLeftGlobal;
+    let pointsAwarded = Math.max(basePoints - secondsWaited, 1); // Ensure at least 1 point is awarded
+    score += pointsAwarded;
+    text = `${question.difficulty.charAt(0).toUpperCase() + question.difficulty.slice(1)} question answered correctly! +${pointsAwarded} points`;
     // Show feedback and next question button
     console.log("Correct answer display attempt");
-    screen.innerHTML = 'Correct!<br>' + text + '<br><button onclick="nextqn()" class="Button">Next</button>';
+    screen.innerHTML = '<h1>Correct!<br>' + text + '</h1><br><button onclick="nextqn()" class="Button">Next</button>';
     screen.style.display = 'block';
     console.log("Success");
 }
 
 // Handle incorrect answer: show correct answer and next button
-function incorrectAnswer(question) {
-    console.log("Incorrect answer display attempt");
-    screen.innerHTML = 'Incorrect!<br> The answer was: ' + question.correct_answer + '<br><button onclick="nextqn()" class="Button">Next</button>';
+function incorrectAnswer(question, timeup) {
+    clearInterval(countdown); // Stop timer when answered or time is up
+    if (timeup) {
+        console.log("Time up display attempt");
+        screen.innerHTML = '<h1>Time is up!<br> The answer was: ' + question.correct_answer + '</h1><br><button onclick="nextqn()" class="Button">Next</button>';
+    } else {
+        console.log("Incorrect answer display attempt");
+        screen.innerHTML = '<h1>Incorrect!<br> The answer was: ' + question.correct_answer + '</h1><br><button onclick="nextqn()" class="Button">Next</button>';
+    }
     screen.style.display = 'block';
     console.log("Success");
 }
@@ -165,12 +186,38 @@ function nextqn() {
         displayQuestions(questions, currentQuestionIndex);
         screen.style.display = 'none';
     } else {
-        // Save score and redirect to results page
-        localStorage.setItem('latestScore', score);
-        const topScore = localStorage.getItem('TopScore');
-        if (score > topScore) {
-            localStorage.setItem('TopScore', score);
-        }
-        window.location.href = 'Results.html';
+        if (elapsedInterval) clearInterval(elapsedInterval);
+        // Format elapsedSeconds as mm:ss
+        let minutes = Math.floor(elapsedSeconds / 60);
+        let seconds = elapsedSeconds % 60;
+        let formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        screen.innerHTML = `
+         <div class="results-center">
+            <h1>Quiz Results</h1>
+            <h2>Score: ${score}</h2>
+            <h2>Time Taken: ${formattedTime}</h2>
+            <div class="button-row">
+                <a href="Quiz.html"><button class="Button">Restart Quiz</button></a>
+                <a href="Stats.html"><button class="Button">View Your Stats</button></a>
+                <a href="index.html"><button class="Button">Back to Home</button></a>
+            </div>
+        </div>`
     }
+}
+
+function Timer() {
+    timeLeftGlobal = 15;
+    timer.innerHTML = timeLeftGlobal;
+
+    clearInterval(countdown); // Clear any previous timer
+    countdown = setInterval(() => {
+        timeLeftGlobal--;
+        timer.innerHTML = timeLeftGlobal;
+
+        if (timeLeftGlobal <= 0) {
+            clearInterval(countdown);
+            // Handle time up scenario
+            incorrectAnswer(questions[currentQuestionIndex], true);
+        }
+    }, 1000);
 }
