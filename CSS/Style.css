@@ -146,4 +146,16 @@ header .Button {
 .quiz-options .quiz-btn:hover {
   background-color: var(--button-hover-bg);
   cursor: pointer;
+}
+
+.AnswerReveal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--header-bg);
+  color: var(--text-color);
+  z-index: 1000;
+  display: none;
+  text-align: center;
+  font-size: 50px;
 }/*# sourceMappingURL=Style.css.map */
