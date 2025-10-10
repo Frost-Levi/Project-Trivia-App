@@ -6,6 +6,7 @@ submitButton.addEventListener('click', function submitAnswers() {
     const category = document.getElementById('category').value;
     const difficulty = document.getElementById('difficulty').value;
     const type = document.getElementById('type').value;
+    SaveOptions(amount, category, difficulty, type);
 
     // Validate the number of questions
     if (amount < 1 || amount > 50) {
@@ -48,6 +49,20 @@ async function fetchQuestions(amount, category, difficulty, type) {
     } catch (error) {
         // Log and rethrow errors
         console.error('Error fetching questions:', error);
+        alert('Error fetching questions. Please try again.');
         throw error;
     }
 }
+SaveOptions = (amount, category, difficulty, type) => {
+    if (category === "") category = "Any";
+    if (difficulty === "") difficulty = "Any";
+    if (type === "") type = "Any";
+    // Save the selected options to localStorage
+    const options = {
+        amount: amount,
+        category: category,
+        difficulty: difficulty,
+        type: type
+    };
+    localStorage.setItem('quizOptions', JSON.stringify(options));
+};

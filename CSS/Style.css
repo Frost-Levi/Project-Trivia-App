@@ -157,7 +157,6 @@ header .Button {
   z-index: 1000;
   display: none;
   text-align: center;
-  font-size: 50px;
 }
 
 .results-center {
@@ -179,4 +178,13 @@ header .Button {
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
+}
+
+#timer {
+  font-size: 5vh;
+  font-weight: bold;
+  text-align: right;
+  width: 100%;
+  float: right;
+  background-color: var(--header-bg);
 }/*# sourceMappingURL=Style.css.map */
