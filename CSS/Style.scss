@@ -1,0 +1,164 @@
+@import 'Themes';
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+header {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 4px var(--box-shadow-color);
+    background-color: var(--header-bg);
+    height: 100px;
+    .Button {
+        position: absolute;
+        right: 20px;
+        top: 40px;
+    }
+}
+.logo {
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.quizForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 8px var(--box-shadow-color);
+
+    .Dropdown, .Input, .Button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        background-color: var(--button-bg);
+        color: var(--button-text);
+
+        &:hover {
+            background-color: var(--button-hover-bg);
+            cursor: pointer;
+        }
+    }
+    // Custom select (Dropdown) styling for consistent background and arrow (ChatGPT made it cus IDK what the fluff that is doing)
+    .Dropdown {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 1.2em;
+        padding-right: 2.5em;
+    }
+}
+
+// Change arrow to white in dark mode (must be outside .quizForm block)
+.dark-mode .quizForm .Dropdown {
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
+}
+
+.Button {
+        width: 100px;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        background-color: var(--button-bg);
+        color: var(--button-text);
+
+        &:hover {
+            background-color: var(--button-hover-bg);
+            cursor: pointer;
+        }
+    }
+.quiz-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.quiz-question {
+    font-size: 5vh;
+    height: 20vh;
+    width: 97.3vw;
+    text-align: center;
+    margin: 0px;
+    padding: 20px;
+    background-color: var(--header-bg);
+    
+}
+.quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    height: 75vh;
+    
+
+    .quiz-btn {
+        width: 48%;
+        height: 40%;
+        padding: 10px;
+        margin: 0.5%;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        font-size: 8vh;
+        box-sizing: border-box;
+        background-color: var(--button-bg);
+        color: var(--button-text);
+
+        &:hover {
+            background-color: var(--button-hover-bg);
+            cursor: pointer;
+        }
+    }
+}
+
+.AnswerReveal {
+    position: absolute;
+    width: 100%;
+    height: 120%;
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    z-index: 1000;
+    display: none; // Hidden by default
+    text-align: center;
+    font-size: 50px;
+}
+
+
+.results-center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 8px var(--box-shadow-color)
+}
+.button-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
