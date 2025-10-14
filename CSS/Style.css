@@ -39,11 +39,6 @@ header {
   background-color: var(--header-bg);
   height: 100px;
 }
-header .Button {
-  position: absolute;
-  right: 20px;
-  top: 40px;
-}
 
 .logo {
   width: 500px;
@@ -51,10 +46,10 @@ header .Button {
   margin: 0 auto;
 }
 
-.quizForm {
+.box {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 400px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid var(--border-color);
@@ -62,7 +57,7 @@ header .Button {
   background-color: var(--bg-color);
   box-shadow: 0 4px 8px var(--box-shadow-color);
 }
-.quizForm .Dropdown, .quizForm .Input, .quizForm .Button {
+.box .Dropdown, .box .Input, .box .Button {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -73,11 +68,11 @@ header .Button {
   background-color: var(--button-bg);
   color: var(--button-text);
 }
-.quizForm .Dropdown:hover, .quizForm .Input:hover, .quizForm .Button:hover {
+.box .Dropdown:hover, .box .Input:hover, .box .Button:hover {
   background-color: var(--button-hover-bg);
   cursor: pointer;
 }
-.quizForm .Dropdown {
+.box .Dropdown {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -187,4 +182,22 @@ header .Button {
   width: 100%;
   float: right;
   background-color: var(--header-bg);
+}
+
+#scroll {
+  overflow-y: auto;
+  height: 445px;
+  scroll-behavior: smooth;
+  text-align: center;
+}
+
+.stats {
+  display: flex;
+  align-self: center;
+  width: 200px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
 }/*# sourceMappingURL=Style.css.map */
