@@ -11,9 +11,25 @@
 </head>
 <body>
     <header>
+        <button class="Button" onclick="window.location.href='index.html'">Home</button>
         <a href="index.html"><img src="images/Logo-light.png" alt="Flipping Trivia Logo" class="logo"></a>
         <button id="theme-toggle" class="Button">Dark Theme</button>
     </header>
-       
+    
+    
+       <div class="box" id="scroll">
+    <h1>Game Statistics</h1>
+    <span class="stats" id="time">Fastest Time</span>
+    <span class="stats" id="Score">Average Score</span>
+    <span class="stats" id="Games">Total Games Played</span>
+    <button class="Button" onclick="clearStats()">Clear Stats</button>
+    <div id="stats-container">
+        <!-- Stats will be dynamically inserted here -->
+    </div>
+    
+</div>
+
+
+
 </body>
 </html>
