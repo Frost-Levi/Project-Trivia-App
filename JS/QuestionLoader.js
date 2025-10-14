@@ -9,6 +9,8 @@ const timer = document.getElementById('timer');
 var countdown; // Make countdown global
 var elapsedSeconds = 0;
 var elapsedInterval;
+var gamelist = localStorage.getItem('gamelist') ? JSON.parse(localStorage.getItem('gamelist')) : [];
+var select = localStorage.getItem('quizOptions') ? JSON.parse(localStorage.getItem('quizOptions')) : null;
 
 // Retrieve questions from localStorage
 const questions = JSON.parse(localStorage.getItem('questions'));
@@ -187,6 +189,22 @@ function nextqn() {
         screen.style.display = 'none';
     } else {
         if (elapsedInterval) clearInterval(elapsedInterval);
+                localStorage.getItem('fastestTime');
+            let FastestTime = localStorage.getItem('FastestTime') || Infinity;
+            if (elapsedSeconds < FastestTime) {
+                FastestTime = elapsedSeconds;
+                localStorage.setItem('FastestTime', FastestTime);
+            }
+            var currentDate = new Date();
+            var gameRecord = {
+                date: currentDate.toLocaleDateString() + ' ' + currentDate.toLocaleTimeString(),
+                score: score,
+                time: elapsedSeconds,
+                category: select ? select.category : "Any",
+                difficulty: select ? select.difficulty : "Any",
+            };
+            gamelist.push(gameRecord);
+            localStorage.setItem('gamelist', JSON.stringify(gamelist));
         // Format elapsedSeconds as mm:ss
         let minutes = Math.floor(elapsedSeconds / 60);
         let seconds = elapsedSeconds % 60;
