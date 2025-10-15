@@ -29,7 +29,7 @@ addEventListener('DOMContentLoaded', function() {
         displayQuestions(questions, 0);
     } else { // If no questions found, return to home page
         console.log('No questions found');
-        window.location.href = './index.html';
+        window.location.href = 'index.html';
     }
 });
 
