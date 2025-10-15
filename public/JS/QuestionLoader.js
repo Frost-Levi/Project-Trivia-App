@@ -215,7 +215,7 @@ function nextqn() {
             <h2>Score: ${score}</h2>
             <h2>Time Taken: ${formattedTime}</h2>
             <div class="button-row">
-                <a href="Quiz.html"><button class="Button">Restart Quiz</button></a>
+                <a href="quiz.html"><button class="Button">Restart Quiz</button></a>
                 <a href="Stats.html"><button class="Button">View Your Stats</button></a>
                 <a href="index.html"><button class="Button">Back to Home</button></a>
             </div>
