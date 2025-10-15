@@ -44,7 +44,7 @@ async function fetchQuestions(amount, category, difficulty, type) {
         }
         // Save questions to localStorage and redirect to quiz page
         localStorage.setItem('questions', JSON.stringify(data.results));
-        window.location.href = 'quiz.html'; 
+        window.location.href = './quiz.html'; 
         return data.results;
     } catch (error) {
         // Log and rethrow errors
